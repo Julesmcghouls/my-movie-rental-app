@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import MovieList from './MovieList';
+import MovieList from './Components/MovieList.jsx';
+import './App.css';
 
 function App() {
   const [searchTerm, setSearchTerm] = useState(''); // Manage search term in App
