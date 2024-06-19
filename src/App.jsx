@@ -5,7 +5,7 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <>
+    <div className="center-container">
       <div>
         <a href="https://react.dev" target="_blank">
           <img src="/LibertyHall.svg" className="logo" alt="React logo" /> 
@@ -13,12 +13,11 @@ function App() {
       </div>
       <div>
         <button className="button" onClick={() => setCount((count) => count + 1)}>
-          Rent ME!
+          RENTED {count} TIMES!
         </button>
+      </div>
     </div>
-    </>
   )
-};    
-    
+}
 
 export default App;
