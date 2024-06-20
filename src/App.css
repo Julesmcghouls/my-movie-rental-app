@@ -16,14 +16,16 @@
 .center-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start; /* Align items to the top */
+  align-items: flex-start; /* Align items to the left */
   height: 100vh;
 }
 
 .data-container {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center; /* Center items vertically */
+  align-items: center; /* Center items horizontally */
   gap: 10px;
 }
 
@@ -42,4 +44,18 @@
 
 .data-cell:first-child {
   font-weight: bold;
+}
+
+.data-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.data-box {
+  overflow-y: scroll;
+  height: 60vh;
+  width: 80vw;
 }

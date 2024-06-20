@@ -1,58 +1,46 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Papa from 'papaparse';
 import './App.css';
 
-// Define the App component
 function App() {
-  // Define a state variable to store the CSV data
-  const [csvData, setCsvData] = React.useState([]);
+  const [data, setData] = useState([]);
 
-  // Use the useEffect hook to perform side effects
-  React.useEffect(() => {
-    // Parse the CSV file using PapaParse when the component mounts
+  useEffect(() => {
     Papa.parse('./MoviesTest.csv', {
-      download: true, // Download the CSV file
-      header: true, // Treat the first row as the header
-      complete: function(results) {
-        // Set the CSV data to the parsed results when parsing is complete
-        setCsvData(results.data);
-      }
+      download: true,
+      header: true,
+      complete: ({ data }) => setData(data),
     });
-  }, []); // Run the effect only once, on component mount
+  }, []);
 
-  // Render the App component
   return (
     <div className="center-container">
-      {/* Display the Liberty Hall logo */}
-      <div>
-        <a href="https://www.libertyhall.net/" target="_blank">
-          <img src="/LibertyHall.svg" className="logo" alt="React logo" /> 
-        </a>
-      </div>
-      {/* Display the CSV data in a table */}
-      <div>
-        <table>
-          <thead>
-            <tr>
-              {/* Display the header row */}
-              <th>Title</th>
-              <th>Director</th>
-              <th>Year</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* Map over the CSV data and display each row */}
-            {csvData.map((row) => (
-              <tr key={row.title}>
-                <td>{row.title}</td>
-                <td>{row.director}</td>
-                <td>{row.year}</td>
-                <td>{row.description}</td>
+      <div className="data-container">
+        <div>
+          <a href="https://www.libertyhall.net/" target="_blank">
+            <img src="/LibertyHall.svg" className="logo" alt="React logo" />
+          </a>
+        </div>
+        <div className="data-box">
+          <table>
+            <thead>
+              <tr>
+                {Object.keys(data[0]).map((key) => (
+                  <th key={key}>{key}</th>
+                ))}
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {data.map((row) => (
+                <tr key={row.title}>
+                  {Object.values(row).map((value) => (
+                    <td key={value}>{value}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
